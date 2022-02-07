@@ -100,9 +100,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- visit the "css" directory and make an update there      -->
 <!-- for the benefit of offline formats                      -->
 <xsl:param name="html.css.server" select="'https://pretextbook.org'" />
-<xsl:param name="html.css.version" select="'0.4'" />
+<xsl:param name="html.css.version" select="'0.5'" />
 <xsl:param name="html.js.server" select="'https://pretextbook.org'" />
-<xsl:param name="html.js.version" select="'0.13'" />
+<xsl:param name="html.js.version" select="'0.2'" />
 
 <!-- Annotation -->
 <xsl:param name="html.annotation" select="''" />
@@ -12171,7 +12171,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <script src="{$html.js.server}/js/lib/jquery.sticky.js" ></script>
             <script src="{$html.js.server}/js/lib/jquery.espy.min.js"></script>
             <script src="{$html.js.server}/js/{$html.js.version}/pretext.js"></script>
-            <script>miniversion=0.674</script>
+            <script>miniversion=0.1</script>
             <script src="{$html.js.server}/js/{$html.js.version}/pretext_add_on.js?x=1"></script>
         </xsl:when>
         <xsl:when test="$b-debug-react-local">
