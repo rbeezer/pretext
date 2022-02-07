@@ -6905,7 +6905,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <main class="main">
                         <!-- relax the 600px width restriction, so with    -->
                         <!-- responsive videos they grow to be much bigger -->
-                        <div id="content" class="pretext-content" style="max-width: 1600px">
+                        <div id="content" class="pretext-content serif" style="max-width: 1600px">
                             <!-- This is content passed in as a parameter -->
                             <xsl:copy-of select="$content" />
                           </div>
@@ -10681,7 +10681,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:apply-templates select="." mode="sidebars" />
                 <!-- HTML5 main will be a "main" landmark automatically -->
                 <main class="main">
-                    <div id="content" class="pretext-content">
+                    <div id="content" class="pretext-content serif">
                         <xsl:if test="$b-watermark">
                             <xsl:attribute name="style">
                                 <xsl:value-of select="$watermark-css" />
@@ -11834,7 +11834,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:if>
         <xsl:text>  },&#xa;</xsl:text>
         <xsl:text>  chtml: {&#xa;</xsl:text>
-        <xsl:text>    scale: 0.88,&#xa;</xsl:text>
+        <xsl:text>    scale: 0.98,&#xa;</xsl:text>
         <xsl:text>    mtextInheritFont: true&#xa;</xsl:text>
         <xsl:text>  },&#xa;</xsl:text>
         <xsl:text>  loader: {&#xa;</xsl:text>
@@ -12195,8 +12195,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Code: Inconsolata, regular (400), bold (700) (was: Source Code Pro regular (400))      -->
 <!-- (SourceCodePro being removed) -->
 <xsl:template name="fonts">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,600,600italic' rel='stylesheet' type='text/css' />
-    <link href='https://fonts.googleapis.com/css?family=Inconsolata:400,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css' />
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&amp;family=Noto+Serif:ital,wght@0,400;0,700;1,400;1,700&amp;family=Open+Sans:ital,wght@0,400;0,600;1,400;1,600&amp;family=Tinos:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" rel="stylesheet"/>
+    <!-- DejaVu Serif from an alternate CDN -->
+    <link href="http://fonts.cdnfonts.com/css/dejavu-serif" rel="stylesheet"/>
 </xsl:template>
 
 <!-- Hypothes.is Annotations -->
