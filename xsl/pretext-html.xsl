@@ -5394,6 +5394,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         <xsl:apply-templates select="." mode="initial-list-item-element"/>
     </xsl:variable>
     <xsl:element name="{$body-element}">
+        <xsl:attribute name="class">
+            <xsl:text>para</xsl:text>
+        </xsl:attribute>
         <!-- label original -->
         <xsl:if test="$b-original">
             <xsl:attribute name="id">
@@ -5436,6 +5439,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:with-param name="b-original" select="$b-original" />
         </xsl:apply-templates>
     </xsl:variable>
+    <div class="para">
+        <!-- INDENT FOLLOWING ON WHITESPACE COMMIT -->
     <!-- XSLT 1.0: RTF is just a string if not converted to node set -->
     <!-- This comparison might improve with a normalize-space()      -->
     <xsl:if test="not($initial-content='')">
@@ -5511,6 +5516,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             </xsl:otherwise>
         </xsl:choose>
     </xsl:for-each>
+        <!-- INDENT ABOVE ON WHITESPACE COMMIT -->
+    </div>
 </xsl:template>
 
 <!-- We drop an empty "leading paragraph" above.  Whatever     -->
@@ -5627,7 +5634,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     </xsl:when>
                     <!-- No good test for unstructured? -->
                     <xsl:otherwise>
-                        <p>
+                        <p class="para">
                             <!-- Create a derived id, if original.  Somewhat  -->
                             <!-- contrived so it doesn't collide with another. -->
                             <xsl:if test="$b-original">
