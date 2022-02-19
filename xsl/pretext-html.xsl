@@ -11541,142 +11541,82 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <!-- Table of Contents Contents (Items) -->
 <!-- Includes "active" class for enclosing outer node              -->
-<!-- Node set equality and subset based on unions of subtrees, see -->
-<!-- http://www.xml.com/cookbooks/xsltckbk/solution.csp?day=5      -->
-<!-- Displayed text is simple titles                               -->
-<!-- TODO: split out inner link formation, outer link formation? -->
 <xsl:template match="*" mode="toc-items">
-    <xsl:if test="$b-has-toc">
-        <!-- Decrement level for books with parts, -->
-        <!-- then 0 is exceptional - parts only    -->
-        <xsl:variable name="adjusted-toc-level">
-            <xsl:choose>
-                <xsl:when test="not($parts = 'absent')">
-                    <xsl:value-of select="$toc-level - 1" />
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$toc-level" />
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <!-- Subtree for page this sidebar will adorn -->
-        <xsl:variable name="this-page-node" select="self::*" />
-        <!-- If a book has parts, they appear as top-level items.       -->
-        <!-- Front matter and back matter will also appear as top-level -->
-        <!-- items, which is especially ueful when they get renamed     -->
-        <!-- (eg "Reference" for "backmatter").  Children of backmatter -->
-        <!-- are like "book/chapter" or "article/section" and also get  -->
-        <!-- a top-level appearance.                                    -->
-        <xsl:for-each select="$root/book/*|$root/book/part/*|$root/article/*|$root/book/backmatter/*|$root/article/backmatter/*">
-            <xsl:variable name="structural">
-                <xsl:apply-templates select="." mode="is-structural" />
-            </xsl:variable>
-            <!-- Bypass chapters for compact ToC for book with parts -->
-            <xsl:if test="$structural='true' and not(($adjusted-toc-level = 0) and self::chapter)">
-                <!-- Subtree represented by this ToC item -->
-                <xsl:variable name="outer-node" select="self::*" />
-                <xsl:variable name="outer-url">
-                    <xsl:apply-templates select="." mode="url"/>
-               </xsl:variable>
-               <!-- text of anchor's class, active if a match, otherwise plain -->
-               <!-- Based on node-set union size; "frontmatter", "backmatter", -->
-               <!-- "part" are for styling                                     -->
-               <xsl:variable name="class">
-                    <xsl:text>link</xsl:text>
-                    <xsl:if test="self::frontmatter">
-                        <xsl:text> frontmatter</xsl:text>
-                    </xsl:if>
-                    <xsl:if test="self::backmatter">
-                        <xsl:text> backmatter</xsl:text>
-                    </xsl:if>
-                    <xsl:if test="self::part">
-                        <xsl:text> part</xsl:text>
-                    </xsl:if>
-                    <xsl:if test="count($this-page-node|$outer-node) = 1" >
-                        <xsl:text> active</xsl:text>
-                    </xsl:if>
-                </xsl:variable>
-                <xsl:variable name="outer-pid">
-                    <xsl:apply-templates select="." mode="html-id" />
-                </xsl:variable>
-                <!-- The link itself -->
-                <li class="{$class}">
-                    <xsl:element name="a">
-                        <xsl:attribute name="href">
-                            <xsl:value-of select="$outer-url" />
-                        </xsl:attribute>
-                        <xsl:attribute name="data-scroll">
-                            <xsl:value-of select="$outer-pid" />
-                        </xsl:attribute>
-                        <xsl:attribute name="class">
-                            <xsl:text>internal</xsl:text>
-                        </xsl:attribute>
-                        <xsl:variable name="num"><xsl:apply-templates select="." mode="number" /></xsl:variable>
-                        <xsl:if test="$num!=''">
-                            <span class="codenumber">
-                                <xsl:value-of select="$num" />
-                            </span>
-                            <xsl:text> </xsl:text>
-                        </xsl:if>
-                        <span class="title">
-                            <xsl:apply-templates select="." mode="title-short" />
-                        </span>
-                    </xsl:element>
-                <!-- Any "part" or "backmatter" displayed as top-level items     -->
-                <!-- have children that are also considered as top-level items,  -->
-                <!-- so we do not examine the children of "part" or "backmatter" -->
-                <!-- as potential second-level items. -->
-                <xsl:if test="not(self::part or self::backmatter) and $adjusted-toc-level > 1">
-                    <!-- a level 1 ToC entry may not have any structural      -->
-                    <!-- descendants, so we build a possible sublist in a     -->
-                    <!-- variable and do not use it if it ends up being empty -->
-                    <xsl:variable name="sublist">
-                        <xsl:for-each select="./*">
-                            <xsl:variable name="inner-structural">
-                                <xsl:apply-templates select="." mode="is-structural" />
-                            </xsl:variable>
-                            <xsl:if test="$inner-structural='true'">
-                                <!-- Subtree represented by this ToC item -->
-                                <xsl:variable name="inner-node" select="self::*" />
-                                <xsl:variable name="inner-url">
-                                    <xsl:apply-templates select="." mode="url" />
-                                </xsl:variable>
-                                <xsl:variable name="inner-pid">
-                                    <xsl:apply-templates select="." mode="html-id" />
-                                </xsl:variable>
-                                <li>
-                                    <xsl:element name="a">
-                                        <xsl:attribute name="href">
-                                            <xsl:value-of select="$inner-url" />
-                                        </xsl:attribute>
-                                        <xsl:attribute name="data-scroll">
-                                            <xsl:value-of select="$inner-pid" />
-                                        </xsl:attribute>
-                                        <xsl:attribute name="class">
-                                            <xsl:text>internal</xsl:text>
-                                        </xsl:attribute>
-                                        <!-- Add if an "active" class if this is where we are -->
-                                        <xsl:if test="count($this-page-node|$inner-node) = 1">
-                                            <xsl:attribute name="class">active</xsl:attribute>
-                                        </xsl:if>
-                                        <xsl:apply-templates select="." mode="title-short" />
-                                    </xsl:element>
-                                </li>
-                            </xsl:if>
-                        </xsl:for-each>
-                    </xsl:variable>
-                    <!-- not clear why this is the right test         -->
-                    <!-- make an unordered list if there is a sublist -->
-                    <xsl:if test="not($sublist='')">
-                        <ul>
-                            <xsl:copy-of select="$sublist" />
-                        </ul>
-                    </xsl:if>
-                </xsl:if>  <!-- end $toc-level > 1 -->
-                </li>
-            </xsl:if>  <!-- end structural, level 1 -->
-        </xsl:for-each>
+    <!-- record the page which is receiving this ToC       -->
+    <!-- pass this along for consultation at each ToC item -->
+    <xsl:variable name="this-page" select="self::*" />
+    <!-- start recursion at the top, since the  -->
+    <!-- ToC is global for the whole document   -->
+    <ul>
+        <xsl:apply-templates select="$document-root" mode="toc-item">
+            <xsl:with-param name="possessing-page" select="$this-page"/>
+        </xsl:apply-templates>
+    </ul>
+</xsl:template>
+
+<!-- NB no "book", "article" -->
+<xsl:template match="frontmatter|abstract|frontmatter/colophon|biography|dedication|acknowledgement|preface|contributors|part|chapter|section|subsection|subsubsection|exercises|solutions|reading-questions|references|glossary|worksheet|backmatter|appendix|index|backmatter/colophon" mode="toc-item">
+    <xsl:param name="possessing-page"/>
+
+    <li>
+        <xsl:apply-templates select="." mode="toc-item-properties">
+            <xsl:with-param name="possessing-page" select="$possessing-page"/>
+        </xsl:apply-templates>
+        <!-- Recurse into children divisions (if any)-->
+        <xsl:variable name="child-list" select="frontmatter|abstract|frontmatter/colophon|biography|dedication|acknowledgement|preface|contributors|part|chapter|section|subsection|subsubsection|exercises|solutions|reading-questions|references|glossary|worksheet|backmatter|appendix|index|backmatter/colophon"/>
+        <xsl:if test="$child-list">
+            <ul>
+                <xsl:apply-templates select="*" mode="toc-item">
+                    <xsl:with-param name="possessing-page" select="$possessing-page"/>
+                </xsl:apply-templates>
+            </ul>
+        </xsl:if>
+    </li>
+</xsl:template>
+
+<!-- Recurse through un-interesting elements -->
+<!-- NB: pass along current page -->
+<!-- Will pickup blocks, etc on unstructured divisions while picking up specialized divisions -->
+<xsl:template match="*" mode="toc-item">
+    <xsl:param name="possessing-page"/>
+
+    <xsl:apply-templates select="*" mode="toc-item">
+        <xsl:with-param name="possessing-page" select="$possessing-page"/>
+    </xsl:apply-templates>
+</xsl:template>
+
+<!-- The contents of a division's "li" -->
+<xsl:template match="*" mode="toc-item-properties">
+    <xsl:param name="possessing-page"/>
+
+    <xsl:variable name="the-url">
+        <xsl:apply-templates select="." mode="url"/>
+    </xsl:variable>
+    <xsl:variable name="the-number">
+        <xsl:apply-templates select="." mode="number" />
+    </xsl:variable>
+
+    <xsl:if test="count($possessing-page|.) = 1">
+        <xsl:attribute name="class">
+            <!-- ToC item equals the page receiving this ToC -->
+            <xsl:text>active</xsl:text>
+        </xsl:attribute>
     </xsl:if>
+    <div class="toc-item">
+        <a href="{$the-url}" class="internal">
+            <xsl:if test="not($the-number = '')">
+                <span class="codenumber">
+                    <xsl:value-of select="$the-number" />
+                </span>
+                <!-- separating space, only if needed -->
+                <xsl:text> </xsl:text>
+            </xsl:if>
+            <!-- *always* a title for divisions -->
+            <span class="title">
+                <xsl:apply-templates select="." mode="title-short" />
+            </span>
+        </a>
+    </div>
 </xsl:template>
 
 <!-- A standalone XML file with ToC necessities  -->
