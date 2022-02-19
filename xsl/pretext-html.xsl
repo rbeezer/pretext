@@ -6852,23 +6852,17 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- the first class controls the default icon -->
                 <xsl:attribute name="class">
                     <xsl:choose>
-                        <xsl:when test="$root/book">pretext-book</xsl:when>
-                        <xsl:when test="$root/article">pretext-article</xsl:when>
+                        <xsl:when test="$root/book">pretext book</xsl:when>
+                        <xsl:when test="$root/article">pretext article</xsl:when>
                     </xsl:choose>
                     <!-- ignore MathJax signals everywhere, then enable selectively -->
                     <xsl:text> ignore-math</xsl:text>
-                    <!-- ################################################# -->
-                    <!-- This is how the left sidebar goes away            -->
-                    <!-- <xsl:if test="$b-has-toc">                        -->
-                    <!--    <xsl:text> has-toc has-sidebar-left</xsl:text> -->
-                    <!-- </xsl:if>                                         -->
-                    <!-- ################################################# -->
                 </xsl:attribute>
                 <!-- assistive "Skip to main content" link    -->
                 <!-- this *must* be first for maximum utility -->
                 <xsl:call-template name="skip-to-content-link" />
                 <xsl:call-template name="latex-macros" />
-                 <header id="masthead" class="smallbuttons">
+                 <header id="masthead">
                     <div class="banner">
                         <div class="container">
                             <xsl:call-template name="brand-logo" />
@@ -10623,6 +10617,15 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:call-template name="pytutor-header" />
             <xsl:call-template name="runestone-header"/>
             <xsl:call-template name="font-awesome" />
+            <!-- analytics services, if requested -->
+            <xsl:call-template name="statcounter"/>
+            <xsl:call-template name="google-classic"/>
+            <xsl:call-template name="google-universal"/>
+            <xsl:call-template name="google-gst"/>
+            <xsl:call-template name="pytutor-footer" />
+            <xsl:call-template name="syntax-highlight-footer" />
+            <xsl:call-template name="aim-login-footer" />
+            <xsl:call-template name="extra-js-footer"/>
         </head>
         <body>
             <!-- potential document-id per-page -->
@@ -10630,60 +10633,56 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <!-- the first class controls the default icon -->
             <xsl:attribute name="class">
                 <xsl:choose>
-                    <xsl:when test="$root/book">pretext-book</xsl:when>
-                    <xsl:when test="$root/article">pretext-article</xsl:when>
+                    <xsl:when test="$root/book">pretext book</xsl:when>
+                    <xsl:when test="$root/article">pretext article</xsl:when>
                 </xsl:choose>
                 <!-- ignore MathJax signals everywhere, then enable selectively -->
                 <xsl:text> ignore-math</xsl:text>
-                <xsl:if test="$b-has-toc">
-                    <xsl:text> has-toc has-sidebar-left</xsl:text> <!-- note space, later add right -->
-                </xsl:if>
                 <xsl:value-of select="$extra-body-classes"/>
             </xsl:attribute>
             <!-- assistive "Skip to main content" link    -->
             <!-- this *must* be first for maximum utility -->
             <xsl:call-template name="skip-to-content-link" />
-            <xsl:call-template name="latex-macros" />
             <!-- HTML5 body/header will be a "banner" landmark automatically -->
-            <header id="masthead" class="smallbuttons">
+            <header id="masthead">
                 <div class="banner">
-                    <div class="container">
-                        <xsl:call-template name="brand-logo" />
-                        <div class="title-container">
-                            <h1 class="heading">
-                                <xsl:variable name="root-filename">
-                                    <xsl:apply-templates select="$document-root" mode="containing-filename" />
-                                </xsl:variable>
-                                <a href="{$root-filename}">
-                                    <xsl:variable name="b-has-subtitle" select="boolean($document-root/subtitle)"/>
-                                    <span class="title">
-                                        <!-- Do not use shorttitle in masthead,  -->
-                                        <!-- which is much like cover of a book  -->
-                                        <xsl:apply-templates select="$document-root" mode="title-simple" />
-                                        <xsl:if test="$b-has-subtitle">
-                                            <xsl:text>:</xsl:text>
-                                        </xsl:if>
-                                    </span>
+                    <xsl:call-template name="brand-logo" />
+                    <div class="title-container">
+                        <h1 class="heading">
+                            <xsl:variable name="root-filename">
+                                <xsl:apply-templates select="$document-root" mode="containing-filename" />
+                            </xsl:variable>
+                            <a href="{$root-filename}">
+                                <xsl:variable name="b-has-subtitle" select="boolean($document-root/subtitle)"/>
+                                <span class="title">
+                                    <!-- Do not use shorttitle in masthead,  -->
+                                    <!-- which is much like cover of a book  -->
+                                    <xsl:apply-templates select="$document-root" mode="title-simple" />
                                     <xsl:if test="$b-has-subtitle">
-                                        <xsl:text> </xsl:text>
-                                        <span class="subtitle">
-                                            <xsl:apply-templates select="$document-root" mode="subtitle" />
-                                        </span>
+                                        <xsl:text>:</xsl:text>
                                     </xsl:if>
-                                </a>
-                            </h1>
-                            <!-- Serial list of authors/editors -->
-                            <p class="byline">
-                                <xsl:apply-templates select="$document-root/frontmatter/titlepage/author" mode="name-list"/>
-                                <xsl:apply-templates select="$document-root/frontmatter/titlepage/editor" mode="name-list"/>
-                            </p>
-                        </div>  <!-- title-container -->
-                        <!-- accessibility suggests relative ordering of next items -->
-                        <xsl:call-template name="google-search-box" />
-                    </div>  <!-- container -->
+                                </span>
+                                <xsl:if test="$b-has-subtitle">
+                                    <xsl:text> </xsl:text>
+                                    <span class="subtitle">
+                                        <xsl:apply-templates select="$document-root" mode="subtitle" />
+                                    </span>
+                                </xsl:if>
+                            </a>
+                        </h1>
+                        <!-- Serial list of authors/editors -->
+                        <p class="byline">
+                            <xsl:apply-templates select="$document-root/frontmatter/titlepage/author" mode="name-list"/>
+                            <xsl:apply-templates select="$document-root/frontmatter/titlepage/editor" mode="name-list"/>
+                        </p>
+                    </div>  <!-- title-container -->
+                    <!-- accessibility suggests relative ordering of next items -->
+                    <!-- KILLED SEARCH -->
+                    <!-- <xsl:call-template name="google-search-box" /> -->
                 </div>  <!-- banner -->
-            <xsl:apply-templates select="." mode="primary-navigation" />
             </header>  <!-- masthead -->
+            <xsl:apply-templates select="." mode="primary-navigation"/>
+            <xsl:call-template name="latex-macros"/>
             <div class="page">
                 <xsl:apply-templates select="." mode="sidebars" />
                 <!-- HTML5 main will be a "main" landmark automatically -->
@@ -10696,18 +10695,19 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         </xsl:if>
                         <xsl:copy-of select="$content" />
                     </div>
+                    <div class="content-footer">
+                        <p>Placeholder "p": inside div.content-footer inside main.main</p>
+                    </div>
                 </main>
             </div>
-
-            <!-- analytics services, if requested -->
-            <xsl:call-template name="statcounter"/>
-            <xsl:call-template name="google-classic"/>
-            <xsl:call-template name="google-universal"/>
-            <xsl:call-template name="google-gst"/>
-            <xsl:call-template name="pytutor-footer" />
-            <xsl:call-template name="syntax-highlight-footer" />
-            <xsl:call-template name="aim-login-footer" />
-            <xsl:call-template name="extra-js-footer"/>
+            <!-- formerly "extra" -->
+            <div class="page-footer">
+                <xsl:if test="$docinfo/feedback">
+                    <xsl:call-template name="feedback-link" />
+                </xsl:if>
+                <xsl:call-template name="pretext-link" />
+                <xsl:call-template name="powered-by-mathjax" />
+            </div>
         </body>
     </html>
     </exsl:document>
@@ -11351,115 +11351,64 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Also organized for small screen modes -->
 <xsl:template match="*" mode="primary-navigation">
     <nav id="primary-navbar" class="navbar">
-        <div class="container">
-            <!-- Several buttons across the top -->
-            <div class="navbar-top-buttons">
-                <xsl:element name="button">
-                    <xsl:attribute name="class">
-                        <xsl:text>sidebar-left-toggle-button button active</xsl:text>
-                    </xsl:attribute>
-                    <xsl:attribute name="aria-label">
-                        <xsl:text>Show or hide table of contents sidebar</xsl:text>
-                    </xsl:attribute>
-                    <xsl:call-template name="type-name">
-                        <xsl:with-param name="string-id" select="'toc'" />
-                    </xsl:call-template>
-                </xsl:element>
-                <!-- Prev/Up/Next buttons on top, according to options -->
+        <xsl:element name="button">
+            <xsl:attribute name="class">
+                <xsl:text>sidebar-left-toggle-button button active</xsl:text>
+            </xsl:attribute>
+            <xsl:attribute name="aria-label">
+                <xsl:text>Show or hide table of contents sidebar</xsl:text>
+            </xsl:attribute>
+            <xsl:call-template name="type-name">
+                <xsl:with-param name="string-id" select="'toc'" />
+            </xsl:call-template>
+        </xsl:element>
+        <!-- Prev/Up/Next buttons on top, according to options -->
+        <xsl:choose>
+            <xsl:when test="$nav-style = 'full'">
+                <!-- A page either has an/the index as    -->
+                <!-- a child, and gets the "jump to" bar, -->
+                <!-- or it deserves an index button       -->
                 <xsl:choose>
-                    <xsl:when test="$nav-style = 'full'">
-                        <xsl:element name="div">
-                            <xsl:attribute name="class">
-                                <!-- 3 or 4 buttons, depending on Up Button choice -->
-                                <xsl:choose>
-                                    <xsl:when test="$nav-upbutton='yes'">
-                                        <xsl:text>tree-nav toolbar toolbar-divisor-3</xsl:text>
-                                    </xsl:when>
-                                    <xsl:when test="$nav-upbutton='no'">
-                                        <xsl:text>tree-nav toolbar toolbar-divisor-2</xsl:text>
-                                    </xsl:when>
-                                </xsl:choose>
-                            </xsl:attribute>
-                            <!-- A page either has an/the index as    -->
-                            <!-- a child, and gets the "jump to" bar, -->
-                            <!-- or it deserves an index button       -->
-                            <xsl:choose>
-                                <xsl:when test="index-list">
-                                    <xsl:apply-templates select="." mode="index-jump-nav" />
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <xsl:apply-templates select="." mode="index-button" />
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            <!-- Button to show/hide the calculator -->
-                            <xsl:if test="$b-has-calculator">
-                                <xsl:call-template name="calculator-toggle" />
-                                <xsl:call-template name="calculator" />
-                            </xsl:if>
-                            <!-- Runestone user menu -->
-                            <!-- Conditional on a build for Runestone hosting -->
-                            <xsl:call-template name="runestone-bust-menu"/>
-                            <!-- Span to encase Prev/Up/Next buttons and float right    -->
-                            <!-- Each button gets an id for keypress recognition/action -->
-                            <xsl:element name="span">
-                                <xsl:attribute name="class">
-                                    <xsl:text>threebuttons</xsl:text>
-                                </xsl:attribute>
-                                <xsl:apply-templates select="." mode="previous-button">
-                                    <xsl:with-param name="id-label" select="'previousbutton'" />
-                                </xsl:apply-templates>
-                                <xsl:if test="$nav-upbutton='yes'">
-                                    <xsl:apply-templates select="." mode="up-button">
-                                        <xsl:with-param name="id-label" select="'upbutton'" />
-                                    </xsl:apply-templates>
-                                </xsl:if>
-                                <xsl:apply-templates select="." mode="next-button">
-                                    <xsl:with-param name="id-label" select="'nextbutton'" />
-                                </xsl:apply-templates>
-                            </xsl:element>
-                        </xsl:element>
+                    <xsl:when test="index-list">
+                        <xsl:apply-templates select="." mode="index-jump-nav" />
                     </xsl:when>
-                    <xsl:when test="$nav-style = 'compact'">
-                        <div class="toolbar toolbar-align-right">
-                            <xsl:apply-templates select="." mode="compact-buttons" />
-                        </div>
-                    </xsl:when>
+                    <xsl:otherwise>
+                        <xsl:apply-templates select="." mode="index-button" />
+                    </xsl:otherwise>
                 </xsl:choose>
-                <!-- Annotations button was once here, see GitHub issue -->
-                <!-- https://github.com/rbeezer/mathbook/issues/1010    -->
-            </div>
-            <!-- Bottom buttons, for mobile UI -->
-            <xsl:element name="div">
-                <xsl:attribute name="class">
-                    <!-- 3 or 4 buttons, depending on Up Button choice -->
-                    <xsl:choose>
-                        <xsl:when test="$nav-upbutton='yes'">
-                            <xsl:text>navbar-bottom-buttons toolbar toolbar-divisor-4</xsl:text>
-                        </xsl:when>
-                        <xsl:when test="$nav-upbutton='no'">
-                            <xsl:text>navbar-bottom-buttons toolbar toolbar-divisor-3</xsl:text>
-                        </xsl:when>
-                    </xsl:choose>
-                </xsl:attribute>
-                <!-- "contents" button is uniform across logic -->
-                <button class="sidebar-left-toggle-button button toolbar-item active">
-                    <xsl:call-template name="type-name">
-                        <xsl:with-param name="string-id" select="'toc'" />
-                    </xsl:call-template>
-                </button>
-                <!-- Prev/Up/Next buttons on top, according to options -->
-                <!-- in order, for mobile interface on bottom          -->
-                <!-- We do not pass an $id-label right now             -->
-                <xsl:apply-templates select="." mode="previous-button" />
-                <xsl:if test="$nav-upbutton='yes'">
-                    <xsl:apply-templates select="." mode="up-button" />
+                <!-- Button to show/hide the calculator -->
+                <xsl:if test="$b-has-calculator">
+                    <xsl:call-template name="calculator-toggle" />
+                    <xsl:call-template name="calculator" />
                 </xsl:if>
-                <xsl:apply-templates select="." mode="next-button" />
-                <!-- Annotations button was once here, see GitHub issue -->
-                <!-- https://github.com/rbeezer/mathbook/issues/1010    -->
-                <!-- increment the toolbar-divisor-4/5 if it returns    -->
-             </xsl:element>
-        </div>
+                <!-- Runestone user menu -->
+                <!-- Conditional on a build for Runestone hosting -->
+                <xsl:call-template name="runestone-bust-menu"/>
+                <!-- Span to encase Prev/Up/Next buttons and float right    -->
+                <!-- Each button gets an id for keypress recognition/action -->
+                <xsl:element name="span">
+                    <xsl:attribute name="class">
+                        <xsl:text>threebuttons</xsl:text>
+                    </xsl:attribute>
+                    <xsl:apply-templates select="." mode="previous-button">
+                        <xsl:with-param name="id-label" select="'previousbutton'" />
+                    </xsl:apply-templates>
+                    <xsl:if test="$nav-upbutton='yes'">
+                        <xsl:apply-templates select="." mode="up-button">
+                            <xsl:with-param name="id-label" select="'upbutton'" />
+                        </xsl:apply-templates>
+                    </xsl:if>
+                    <xsl:apply-templates select="." mode="next-button">
+                        <xsl:with-param name="id-label" select="'nextbutton'" />
+                    </xsl:apply-templates>
+                </xsl:element>
+            </xsl:when>
+            <xsl:when test="$nav-style = 'compact'">
+                <xsl:apply-templates select="." mode="compact-buttons" />
+            </xsl:when>
+        </xsl:choose>
+        <!-- Annotations button was once here, see GitHub issue -->
+        <!-- https://github.com/rbeezer/mathbook/issues/1010    -->
     </nav>
 </xsl:template>
 
@@ -11467,32 +11416,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Two HTML aside's for ToC (left), Annotations (right)       -->
 <!-- Need to pass node down into "toc-items", which is per-page -->
 <xsl:template match="*" mode="sidebars">
-    <!-- ARIA: "navigation" role for sidebar ToC                 -->
-    <!-- HTML5 nav will be a "navigation" landmark automatically -->
-    <!-- Maybe this will change at some point                    -->
-    <div id="sidebar-left" class="sidebar" role="navigation">
-        <div class="sidebar-content">
-            <nav id="toc">
-              <ul>
-                 <xsl:apply-templates select="." mode="toc-items" />
-              </ul>
-            </nav>
-            <div class="extras">
-                <nav>
-                    <xsl:if test="$docinfo/feedback">
-                        <xsl:call-template name="feedback-link" />
-                    </xsl:if>
-                    <xsl:call-template name="pretext-link" />
-                    <xsl:call-template name="powered-by-mathjax" />
-                </nav>
-            </div>
-        </div>
+    <div id="sidebar">
+        <nav id="toc" class="depth2">
+            <xsl:apply-templates select="." mode="toc-items"/>
+        </nav>
     </div>
-    <!-- Content here appears in odd places if turned sidebar is turned off
-        <aside id="sidebar-right" class="sidebar">
-            <div class="sidebar-content">Mock right sidebar content</div>
-        </aside> -->
-</xsl:template>
+ </xsl:template>
 
 <xsl:template name="calculator">
     <xsl:if test="contains($html-calculator,'geogebra')">
