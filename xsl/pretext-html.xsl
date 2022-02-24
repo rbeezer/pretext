@@ -100,7 +100,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- visit the "css" directory and make an update there      -->
 <!-- for the benefit of offline formats                      -->
 <xsl:param name="html.css.server" select="'https://pretextbook.org'" />
-<xsl:param name="html.css.version" select="'0.5'" />
+<xsl:param name="html.css.version" select="'0.6'" />
 <xsl:param name="html.js.server" select="'https://pretextbook.org'" />
 <xsl:param name="html.js.version" select="'0.2'" />
 
@@ -6862,51 +6862,49 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- this *must* be first for maximum utility -->
                 <xsl:call-template name="skip-to-content-link" />
                 <xsl:call-template name="latex-macros" />
-                 <header id="masthead">
-                    <div class="banner">
-                        <div class="container">
-                            <xsl:call-template name="brand-logo" />
-                            <div class="title-container">
-                                <h1 class="heading">
-                                    <xsl:variable name="root-filename">
-                                        <xsl:apply-templates select="$document-root" mode="containing-filename" />
-                                    </xsl:variable>
-                                    <a href="{$root-filename}">
-                                        <xsl:variable name="b-has-subtitle" select="boolean($document-root/subtitle)"/>
-                                        <span class="title">
-                                            <!-- Do not use shorttitle in masthead,  -->
-                                            <!-- which is much like cover of a book  -->
-                                            <xsl:apply-templates select="$document-root" mode="title-simple" />
-                                            <xsl:if test="$b-has-subtitle">
-                                                <xsl:text>:</xsl:text>
-                                            </xsl:if>
-                                        </span>
+                 <header id="ptx-masthead">
+                    <div class="ptx-banner">
+                        <xsl:call-template name="brand-logo" />
+                        <div class="title-container">
+                            <h1 class="heading">
+                                <xsl:variable name="root-filename">
+                                    <xsl:apply-templates select="$document-root" mode="containing-filename" />
+                                </xsl:variable>
+                                <a href="{$root-filename}">
+                                    <xsl:variable name="b-has-subtitle" select="boolean($document-root/subtitle)"/>
+                                    <span class="title">
+                                        <!-- Do not use shorttitle in masthead,  -->
+                                        <!-- which is much like cover of a book  -->
+                                        <xsl:apply-templates select="$document-root" mode="title-simple" />
                                         <xsl:if test="$b-has-subtitle">
-                                            <xsl:text> </xsl:text>
-                                            <span class="subtitle">
-                                                <xsl:apply-templates select="$document-root" mode="subtitle" />
-                                            </span>
+                                            <xsl:text>:</xsl:text>
                                         </xsl:if>
-                                    </a>
-                                </h1>
-                                <!-- Serial list of authors/editors -->
-                                <p class="byline">
-                                    <xsl:apply-templates select="$document-root/frontmatter/titlepage/author" mode="name-list"/>
-                                    <xsl:apply-templates select="$document-root/frontmatter/titlepage/editor" mode="name-list"/>
-                                </p>
-                            </div>  <!-- title-container -->
-                        </div>  <!-- container -->
+                                    </span>
+                                    <xsl:if test="$b-has-subtitle">
+                                        <xsl:text> </xsl:text>
+                                        <span class="subtitle">
+                                            <xsl:apply-templates select="$document-root" mode="subtitle" />
+                                        </span>
+                                    </xsl:if>
+                                </a>
+                            </h1>
+                            <!-- Serial list of authors/editors -->
+                            <p class="byline">
+                                <xsl:apply-templates select="$document-root/frontmatter/titlepage/author" mode="name-list"/>
+                                <xsl:apply-templates select="$document-root/frontmatter/titlepage/editor" mode="name-list"/>
+                            </p>
+                        </div>  <!-- title-container -->
                     </div> <!-- banner -->
                     <!-- This seemed to not be enough, until Google Search went away  -->
                     <!-- <xsl:apply-templates select="." mode="primary-navigation" /> -->
                 </header> <!-- masthead -->
-                <div class="page">
+                <div class="ptx-page">
                     <!-- With sidebars killed, this stuff is extraneous     -->
                     <!-- <xsl:apply-templates select="." mode="sidebars" /> -->
-                    <main class="main">
+                    <main class="ptx-main">
                         <!-- relax the 600px width restriction, so with    -->
                         <!-- responsive videos they grow to be much bigger -->
-                        <div id="content" class="pretext-content serif" style="max-width: 1600px">
+                        <div class="ptx-content serif" style="max-width: 1600px">
                             <!-- This is content passed in as a parameter -->
                             <xsl:copy-of select="$content" />
                           </div>
@@ -9801,7 +9799,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:apply-templates select="." mode="header-libraries" />
             </head>
                 <!-- ignore MathJax signals everywhere, then enable selectively -->
-                <body class="pretext-content ignore-math">
+                <body class="pretext ignore-math">
                 <!-- potential document-id per-page -->
                 <xsl:call-template name="document-id"/>
                 <div>
@@ -10644,8 +10642,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <!-- this *must* be first for maximum utility -->
             <xsl:call-template name="skip-to-content-link" />
             <!-- HTML5 body/header will be a "banner" landmark automatically -->
-            <header id="masthead">
-                <div class="banner">
+            <header id="ptx-masthead">
+                <div class="ptx-banner">
                     <xsl:call-template name="brand-logo" />
                     <div class="title-container">
                         <h1 class="heading">
@@ -10683,11 +10681,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             </header>  <!-- masthead -->
             <xsl:apply-templates select="." mode="primary-navigation"/>
             <xsl:call-template name="latex-macros"/>
-            <div class="page">
+            <div class="ptx-page">
                 <xsl:apply-templates select="." mode="sidebars" />
                 <!-- HTML5 main will be a "main" landmark automatically -->
-                <main class="main">
-                    <div id="content" class="pretext-content serif">
+                <main class="ptx-main">
+                    <div class="ptx-content serif">
                         <xsl:if test="$b-watermark">
                             <xsl:attribute name="style">
                                 <xsl:value-of select="$watermark-css" />
@@ -10695,13 +10693,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         </xsl:if>
                         <xsl:copy-of select="$content" />
                     </div>
-                    <div class="content-footer">
+                    <div class="ptx-content-footer">
                         <p>Placeholder "p": inside div.content-footer inside main.main</p>
                     </div>
                 </main>
             </div>
             <!-- formerly "extra" -->
-            <div class="page-footer">
+            <div class="ptx-page-footer">
                 <xsl:if test="$docinfo/feedback">
                     <xsl:call-template name="feedback-link" />
                 </xsl:if>
@@ -11093,7 +11091,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">previous-button toolbar-item button</xsl:attribute>
+                <xsl:attribute name="class">previous-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$previous-url" />
                 </xsl:attribute>
@@ -11114,7 +11112,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">previous-button button toolbar-item disabled</xsl:attribute>
+                <xsl:attribute name="class">previous-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'previous-short'" />
                 </xsl:call-template>
@@ -11130,7 +11128,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:variable>
         <xsl:element name="a">
             <xsl:attribute name="class">
-                <xsl:text>index-button toolbar-item button</xsl:text>
+                <xsl:text>index-button button</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="href">
                 <xsl:value-of select="$url" />
@@ -11205,7 +11203,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">next-button button toolbar-item</xsl:attribute>
+                <xsl:attribute name="class">next-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$next-url" />
                 </xsl:attribute>
@@ -11226,7 +11224,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">next-button button toolbar-item disabled</xsl:attribute>
+                <xsl:attribute name="class">next-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'next-short'" />
                 </xsl:call-template>
@@ -11249,7 +11247,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">up-button button toolbar-item</xsl:attribute>
+                <xsl:attribute name="class">up-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$up-url" />
                 </xsl:attribute>
@@ -11270,7 +11268,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
-                <xsl:attribute name="class">up-button button disabled toolbar-item</xsl:attribute>
+                <xsl:attribute name="class">up-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'up-short'" />
                 </xsl:call-template>
@@ -11280,7 +11278,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 </xsl:template>
 
 <xsl:template name="calculator-toggle">
-    <button id="calculator-toggle" class="toolbar-item button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button>
+    <button id="calculator-toggle" class="button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button>
 </xsl:template>
 
 
@@ -11350,10 +11348,10 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- ToC, Prev/Up/Next/Annotation buttons  -->
 <!-- Also organized for small screen modes -->
 <xsl:template match="*" mode="primary-navigation">
-    <nav id="primary-navbar" class="navbar">
+    <nav id="ptx-navbar" class="navbar">
         <xsl:element name="button">
             <xsl:attribute name="class">
-                <xsl:text>sidebar-left-toggle-button button active</xsl:text>
+                <xsl:text>toc-toggle button active</xsl:text>
             </xsl:attribute>
             <xsl:attribute name="aria-label">
                 <xsl:text>Show or hide table of contents sidebar</xsl:text>
@@ -11388,7 +11386,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- Each button gets an id for keypress recognition/action -->
                 <xsl:element name="span">
                     <xsl:attribute name="class">
-                        <xsl:text>threebuttons</xsl:text>
+                        <xsl:text>treebuttons</xsl:text>
                     </xsl:attribute>
                     <xsl:apply-templates select="." mode="previous-button">
                         <xsl:with-param name="id-label" select="'previousbutton'" />
@@ -11416,8 +11414,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Two HTML aside's for ToC (left), Annotations (right)       -->
 <!-- Need to pass node down into "toc-items", which is per-page -->
 <xsl:template match="*" mode="sidebars">
-    <div id="sidebar">
-        <nav id="toc" class="depth2">
+    <div id="ptx-sidebar">
+        <nav id="ptx-toc" class="depth2">
             <xsl:apply-templates select="." mode="toc-items"/>
         </nav>
     </div>
