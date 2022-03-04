@@ -11100,9 +11100,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:with-param name="string-id" select="'previous'" />
                     </xsl:call-template>
                 </xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'previous-short'" />
-                </xsl:call-template>
+                <span class="icon">&lt;</span>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'previous-short'" />
+                    </xsl:call-template>
+                </span>
             </xsl:element>
         </xsl:when>
         <xsl:otherwise>
@@ -11138,9 +11141,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <xsl:with-param name="string-id" select="'index-part'" />
                 </xsl:call-template>
             </xsl:attribute>
-            <xsl:call-template name="type-name">
-                <xsl:with-param name="string-id" select="'index-part'" />
-            </xsl:call-template>
+            <span class="name">
+                <xsl:call-template name="type-name">
+                    <xsl:with-param name="string-id" select="'index-part'" />
+                </xsl:call-template>
+            </span>
         </xsl:element>
     </xsl:if>
 </xsl:template>
@@ -11212,9 +11217,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:with-param name="string-id" select="'next'" />
                     </xsl:call-template>
                 </xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'next-short'" />
-                </xsl:call-template>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'next-short'" />
+                    </xsl:call-template>
+                </span>
+                <span class="icon">&gt;</span>
             </xsl:element>
         </xsl:when>
         <xsl:otherwise>
@@ -11256,9 +11264,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:with-param name="string-id" select="'up'" />
                     </xsl:call-template>
                 </xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'up-short'" />
-                </xsl:call-template>
+                <span class="icon">^</span>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'up-short'" />
+                    </xsl:call-template>
+                </span>
             </xsl:element>
         </xsl:when>
         <xsl:otherwise>
@@ -11278,10 +11289,11 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 </xsl:template>
 
 <xsl:template name="calculator-toggle">
-    <button id="calculator-toggle" class="button toggle" title="Show calculator" aria-expanded="false" aria-controls="calculator-container">Calc</button>
+    <button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="name">Calc</span></button>
 </xsl:template>
 
 
+<!--    Compact Buttons no longer supported, so this can be deleted, says David F -->
 <!-- Compact Buttons -->
 <!-- These get smashed consecutively into a single "tool-bar" -->
 <xsl:template match="*" mode="compact-buttons">
@@ -11349,6 +11361,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- Also organized for small screen modes -->
 <xsl:template match="*" mode="primary-navigation">
     <nav id="ptx-navbar" class="navbar">
+        <button class="toc-toggle button" aria-label="Show or hide table of contents">
+<!--
         <xsl:element name="button">
             <xsl:attribute name="class">
                 <xsl:text>toc-toggle button active</xsl:text>
@@ -11356,10 +11370,17 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <xsl:attribute name="aria-label">
                 <xsl:text>Show or hide table of contents sidebar</xsl:text>
             </xsl:attribute>
-            <xsl:call-template name="type-name">
-                <xsl:with-param name="string-id" select="'toc'" />
-            </xsl:call-template>
+-->
+            <span class="icon">☰</span>
+            <span class="name">
+                <xsl:call-template name="type-name">
+                    <xsl:with-param name="string-id" select="'toc'" />
+                </xsl:call-template>
+            </span>
+        </button>
+<!--
         </xsl:element>
+-->
         <!-- Prev/Up/Next buttons on top, according to options -->
         <xsl:choose>
             <xsl:when test="$nav-style = 'full'">
@@ -11384,10 +11405,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:call-template name="runestone-bust-menu"/>
                 <!-- Span to encase Prev/Up/Next buttons and float right    -->
                 <!-- Each button gets an id for keypress recognition/action -->
+                <span class="treebuttons">
+<!--
                 <xsl:element name="span">
                     <xsl:attribute name="class">
                         <xsl:text>treebuttons</xsl:text>
                     </xsl:attribute>
+-->
                     <xsl:apply-templates select="." mode="previous-button">
                         <xsl:with-param name="id-label" select="'previousbutton'" />
                     </xsl:apply-templates>
@@ -11399,7 +11423,10 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <xsl:apply-templates select="." mode="next-button">
                         <xsl:with-param name="id-label" select="'nextbutton'" />
                     </xsl:apply-templates>
+                </span>
+<!--
                 </xsl:element>
+-->
             </xsl:when>
             <xsl:when test="$nav-style = 'compact'">
                 <xsl:apply-templates select="." mode="compact-buttons" />
