@@ -10694,7 +10694,16 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:copy-of select="$content" />
                     </div>
                     <div class="ptx-content-footer">
-                        <p>Placeholder "p": inside div.content-footer inside main.main</p>
+                        <xsl:apply-templates select="." mode="previous-button">
+                            <xsl:with-param name="id-label" select="'previousbutton'" />
+                        </xsl:apply-templates>
+                        <a class="top-button button" href="#" title="Top">
+                            <span class="icon">^</span>
+                            <span class="name">Top</span>
+                        </a> 
+                        <xsl:apply-templates select="." mode="next-button">
+                            <xsl:with-param name="id-label" select="'nextbutton'" />
+                        </xsl:apply-templates>
                     </div>
                 </main>
             </div>
@@ -11086,11 +11095,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$previous-url!=''">
             <xsl:element name="a">
+<!-- no need for label on tree buttons
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">previous-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$previous-url" />
@@ -11110,11 +11121,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
+<!--
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">previous-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'previous-short'" />
@@ -11203,11 +11216,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$next-url!=''">
             <xsl:element name="a">
+<!--
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">next-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$next-url" />
@@ -11227,11 +11242,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
+<!--
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">next-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'next-short'" />
@@ -11250,11 +11267,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$up-url!=''">
             <xsl:element name="a">
+<!--
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">up-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$up-url" />
@@ -11274,11 +11293,13 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
+<!--
                 <xsl:if test="not($id-label='')">
                     <xsl:attribute name="id">
                         <xsl:value-of select="$id-label" />
                     </xsl:attribute>
                 </xsl:if>
+-->
                 <xsl:attribute name="class">up-button button disabled</xsl:attribute>
                 <xsl:call-template name="type-name">
                     <xsl:with-param name="string-id" select="'up-short'" />
