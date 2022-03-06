@@ -11095,13 +11095,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$previous-url!=''">
             <xsl:element name="a">
-<!-- no need for label on tree buttons
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">previous-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$previous-url" />
@@ -11121,13 +11114,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
-<!--
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">previous-button button disabled</xsl:attribute>
                 <span class="icon">&lt;</span>
                 <span class="name">
@@ -11219,13 +11205,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$next-url!=''">
             <xsl:element name="a">
-<!--
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">next-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$next-url" />
@@ -11245,13 +11224,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
-<!--
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">next-button button disabled</xsl:attribute>
                 <span class="name">
                     <xsl:call-template name="type-name">
@@ -11273,13 +11245,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:choose>
         <xsl:when test="$up-url!=''">
             <xsl:element name="a">
-<!--
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">up-button button</xsl:attribute>
                 <xsl:attribute name="href">
                     <xsl:value-of select="$up-url" />
@@ -11299,13 +11264,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="span">
-<!--
-                <xsl:if test="not($id-label='')">
-                    <xsl:attribute name="id">
-                        <xsl:value-of select="$id-label" />
-                    </xsl:attribute>
-                </xsl:if>
--->
                 <xsl:attribute name="class">up-button button disabled</xsl:attribute>
                 <span class="icon">^</span>
                 <span class="name">
@@ -11392,15 +11350,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <xsl:template match="*" mode="primary-navigation">
     <nav id="ptx-navbar" class="navbar">
         <button class="toc-toggle button" aria-label="Show or hide table of contents">
-<!--
-        <xsl:element name="button">
-            <xsl:attribute name="class">
-                <xsl:text>toc-toggle button active</xsl:text>
-            </xsl:attribute>
-            <xsl:attribute name="aria-label">
-                <xsl:text>Show or hide table of contents sidebar</xsl:text>
-            </xsl:attribute>
--->
             <span class="icon">☰</span>
             <span class="name">
                 <xsl:call-template name="type-name">
@@ -11408,9 +11357,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 </xsl:call-template>
             </span>
         </button>
-<!--
-        </xsl:element>
--->
         <!-- Prev/Up/Next buttons on top, according to options -->
         <xsl:choose>
             <xsl:when test="$nav-style = 'full'">
@@ -11436,12 +11382,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- Span to encase Prev/Up/Next buttons and float right    -->
                 <!-- Each button gets an id for keypress recognition/action -->
                 <span class="treebuttons">
-<!--
-                <xsl:element name="span">
-                    <xsl:attribute name="class">
-                        <xsl:text>treebuttons</xsl:text>
-                    </xsl:attribute>
--->
                     <xsl:apply-templates select="." mode="previous-button">
                         <xsl:with-param name="id-label" select="'previousbutton'" />
                     </xsl:apply-templates>
@@ -11454,9 +11394,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                         <xsl:with-param name="id-label" select="'nextbutton'" />
                     </xsl:apply-templates>
                 </span>
-<!--
-                </xsl:element>
--->
             </xsl:when>
             <xsl:when test="$nav-style = 'compact'">
                 <xsl:apply-templates select="." mode="compact-buttons" />
@@ -11663,9 +11600,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 </xsl:template>
 
 
-<!-- Feedback Button goes at the bottom (in "extras") -->
-<!-- Text from docinfo, or localized string           -->
-<!-- Target URL from docinfo                          -->
+<!-- Feedback Button goes in page-footer    -->
+<!-- Text from docinfo, or localized string -->
+<!-- Target URL from docinfo                -->
 <xsl:template name="feedback-link">
     <!-- Possibly an empty URL -->
     <a class="feedback-link" href="{$docinfo/feedback/url}" target="_blank">
@@ -11682,7 +11619,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </a>
 </xsl:template>
 
-<!-- Branding in "extras", mostly hard-coded        -->
+<!-- Branding in page-footer, mostly hard-coded     -->
 <!-- HTTPS for authors delivering from secure sites -->
 <xsl:template name="pretext-link">
     <a class="pretext-link" href="https://pretextbook.org">
@@ -11692,10 +11629,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
         </xsl:call-template>
         </div>
         <div class="logo">
-        <!--
-        <svg xmlns="http://www.w3.org/2000/svg" width="7.3in" height="5.7in" viewBox="338 3000 8772 6866">
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.7in" height="1.2in" viewBox="338 3000 8772 6866">
-        -->
             <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="338 3000 8772 6866">
             <g style="stroke-width:.025in; stroke:black; fill:none">
             <polyline points="472,3590 472,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "/> <path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,9448 A 4660 4660  0  0  1  8598  9259 " /> <path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4488,9685 A 4228 4228  0  0  0  472  9732 " /> <path style="stroke:#000000;stroke-width:126;stroke-linecap:butt;" d="M 4724,3590 A 4241 4241  0  0  1  8598  3496 " /> <path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,3496 A 4241 4241  0  0  1  4724  3590 " /> <path style="stroke:#000000;stroke-width:126;stroke-linecap:round;" d="M 850,9259 A 4507 4507  0  0  1  4724  9448 " /> <polyline points="5385,4299 4062,8125 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "/> <polyline points="8598,3496 8598,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "/> <polyline points="850,3496 850,9259 " style="stroke:#000000;stroke-width:126; stroke-linejoin:miter; stroke-linecap:round; "/> <polyline points="4960,9685 4488,9685 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "/><polyline points="3070,4582 1889,6141 3070,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "/> <polyline points="6418,4582 7600,6141 6418,7700 " style="stroke:#000000;stroke-width:300; stroke-linejoin:miter; stroke-linecap:round; "/> <polyline points="8976,3590 8976,9732 " style="stroke:#000000;stroke-width:174; stroke-linejoin:miter; stroke-linecap:round; "/> <path style="stroke:#000000;stroke-width:174;stroke-linecap:butt;" d="M 4960,9685 A 4228 4228  0  0  1  8976  9732 " />
@@ -11705,7 +11638,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </a>
 </xsl:template>
 
-<!-- MathJax Logo for bottom of left sidebar -->
+<!-- MathJax Logo for page-footer -->
 <xsl:template name="powered-by-mathjax">
     <a class="mathjax-logo" href="https://www.mathjax.org">
         <img title="Powered by MathJax" src="https://www.mathjax.org/badge/badge.gif" alt="Powered by MathJax" />
