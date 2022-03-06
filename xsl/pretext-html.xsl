@@ -11154,40 +11154,42 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <!-- The "jump to" navigation on a page with the index -->
 <xsl:template match="*" mode="index-jump-nav">
-    <span class="mininav">
-        <xsl:call-template name="type-name">
-            <xsl:with-param name="string-id" select="'jump-to'" />
-        </xsl:call-template>
-    </span>
-    <span class="indexnav">
-    <a href="#indexletter-a">A </a>
-    <a href="#indexletter-b">B </a>
-    <a href="#indexletter-c">C </a>
-    <a href="#indexletter-d">D </a>
-    <a href="#indexletter-e">E </a>
-    <a href="#indexletter-f">F </a>
-    <a href="#indexletter-g">G </a>
-    <a href="#indexletter-h">H </a>
-    <a href="#indexletter-i">I </a>
-    <a href="#indexletter-j">J </a>
-    <a href="#indexletter-k">K </a>
-    <a href="#indexletter-l">L </a>
-    <a href="#indexletter-m">M </a>
-    <br />
-    <a href="#indexletter-n">N </a>
-    <a href="#indexletter-o">O </a>
-    <a href="#indexletter-p">P </a>
-    <a href="#indexletter-q">Q </a>
-    <a href="#indexletter-r">R </a>
-    <a href="#indexletter-s">S </a>
-    <a href="#indexletter-t">T </a>
-    <a href="#indexletter-u">U </a>
-    <a href="#indexletter-v">V </a>
-    <a href="#indexletter-w">W </a>
-    <a href="#indexletter-x">X </a>
-    <a href="#indexletter-y">Y </a>
-    <a href="#indexletter-z">Z </a>
-    </span>
+    <div class="indexnav">
+        <span class="mininav">
+            <xsl:call-template name="type-name">
+                <xsl:with-param name="string-id" select="'jump-to'" />
+            </xsl:call-template>
+        </span>
+        <span class="indexjump">
+            <a href="#indexletter-a">A </a>
+            <a href="#indexletter-b">B </a>
+            <a href="#indexletter-c">C </a>
+            <a href="#indexletter-d">D </a>
+            <a href="#indexletter-e">E </a>
+            <a href="#indexletter-f">F </a>
+            <a href="#indexletter-g">G </a>
+            <a href="#indexletter-h">H </a>
+            <a href="#indexletter-i">I </a>
+            <a href="#indexletter-j">J </a>
+            <a href="#indexletter-k">K </a>
+            <a href="#indexletter-l">L </a>
+            <a href="#indexletter-m">M </a>
+            <br />
+            <a href="#indexletter-n">N </a>
+            <a href="#indexletter-o">O </a>
+            <a href="#indexletter-p">P </a>
+            <a href="#indexletter-q">Q </a>
+            <a href="#indexletter-r">R </a>
+            <a href="#indexletter-s">S </a>
+            <a href="#indexletter-t">T </a>
+            <a href="#indexletter-u">U </a>
+            <a href="#indexletter-v">V </a>
+            <a href="#indexletter-w">W </a>
+            <a href="#indexletter-x">X </a>
+            <a href="#indexletter-y">Y </a>
+            <a href="#indexletter-z">Z </a>
+        </span>
+    </div>
 </xsl:template>
 
 <xsl:template match="*" mode="next-button">
