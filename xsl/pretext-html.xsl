@@ -11129,9 +11129,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 </xsl:if>
 -->
                 <xsl:attribute name="class">previous-button button disabled</xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'previous-short'" />
-                </xsl:call-template>
+                <span class="icon">&lt;</span>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'previous-short'" />
+                    </xsl:call-template>
+                </span>
             </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
@@ -11250,9 +11253,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 </xsl:if>
 -->
                 <xsl:attribute name="class">next-button button disabled</xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'next-short'" />
-                </xsl:call-template>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'next-short'" />
+                    </xsl:call-template>
+                </span>
+                <span class="icon">&gt;</span>
             </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
@@ -11301,9 +11307,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 </xsl:if>
 -->
                 <xsl:attribute name="class">up-button button disabled</xsl:attribute>
-                <xsl:call-template name="type-name">
-                    <xsl:with-param name="string-id" select="'up-short'" />
-                </xsl:call-template>
+                <span class="icon">^</span>
+                <span class="name">
+                    <xsl:call-template name="type-name">
+                        <xsl:with-param name="string-id" select="'up-short'" />
+                    </xsl:call-template>
+                </span>
             </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
