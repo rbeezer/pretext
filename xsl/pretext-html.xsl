@@ -11282,6 +11282,67 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <button id="calculator-toggle" class="calculator-toggle button" title="Show calculator" aria-expanded="false" aria-controls="calculator-container"><span class="name">Calc</span></button>
 </xsl:template>
 
+<xsl:template name="user-preferences-menu">
+    <button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences">
+      <span class="name">You!</span>
+      <div id="preferences_menu_holder" class="hidden">
+        <ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
+          <li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden avatars">
+              <li data-val="you" tabindex="-1">You!</li>
+              <li data-val="cat" tabindex="-1">😺</li>
+              <li data-val="bust" tabindex="-1">&#x1F464;</li>
+              <li data-val="alien" tabindex="-1">👽</li>
+              <li data-val="dog" tabindex="-1">🐶</li>
+              <li data-val="panda" tabindex="-1">🐼</li>
+              <li data-val="rainbow" tabindex="-1">🌈</li>
+            </ol>
+          </li>
+          <li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden fonts">
+              <li>Face</li>
+<li></li>
+              <li data-val="face" data-change="ss" tabindex="-1">Serif<span id="theserif" class="check">✔️</span></li>
+              <li data-val="face" data-change="serif" tabindex="-1">Sans-serif<span id="thess" class="check"></span></li>
+              <li>Size</li>
+<li><span id="thesize">12</span></li>
+              <li data-val="size" data-change="-1" tabindex="-1" style="font-size: 85%">SMALLER</li>
+              <li data-val="size" data-change="1" tabindex="-1" style="font-size: 115%">LARGER</li>
+              <li>Letter spacing</li>
+<li><span id="thelspace">0</span>/200</li>
+              <li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+              <li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+              <li>Word spacing</li>
+<li><span id="thewspace">0</span>/50</li>
+              <li data-val="wspace" data-change="-1" tabindex="-1">small&#8197;gap</li>
+              <li data-val="wspace" data-change="1" tabindex="-1">large&#8195;gap</li>
+              <li>Width</li>
+<li><span id="thewdth">100</span></li>
+              <li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
+              <li data-val="wdth" data-change="5" tabindex="-1" style="font-variation-settings: 'wdth' 150">wider</li>
+              <li>Weight</li>
+<li><span id="thewght">400</span></li>
+              <li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
+              <li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+              <li>Line Spacing</li>
+<li><span id="theheight">12</span>/10</li>
+              <li data-val="height" data-change="-1" tabindex="-1">closer<br/>together</li>
+              <li data-val="height" data-change="1" tabindex="-1">further<br/>&#8195;<br/>apart</li>
+            </ol>
+          </li>
+          <li data-env="mode" tabindex="-1">Select dark/light mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden mode">
+              <li data-val="light" tabindex="-1">light</li>
+              <li data-val="pastel" tabindex="-1">pastel</li>
+              <li data-val="grey" tabindex="-1">grey</li>
+              <li data-val="dark" tabindex="-1">dark</li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+    </button>
+</xsl:template>
+
 
 <!--    Compact Buttons no longer supported, so this can be deleted, says David F -->
 <!-- Compact Buttons -->
@@ -11381,6 +11442,8 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <!-- Runestone user menu -->
                 <!-- Conditional on a build for Runestone hosting -->
                 <xsl:call-template name="runestone-bust-menu"/>
+                <!-- The user-preferences-menu needs to be unified with the runestone-bust-menu -->
+                <xsl:call-template name="user-preferences-menu"/>
                 <!-- Span to encase Prev/Up/Next buttons and float right    -->
                 <!-- Each button gets an id for keypress recognition/action -->
                 <span class="treebuttons">
@@ -12052,6 +12115,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <script src="{$html.js.server}/js/{$html.js.version}/pretext.js"></script>
             <script>miniversion=0.1</script>
             <script src="{$html.js.server}/js/{$html.js.version}/pretext_add_on.js?x=1"></script>
+            <script src="{$html.js.server}/js/{$html.js.version}/user_preferences.js"></script>
         </xsl:when>
         <xsl:when test="$b-debug-react-local">
             <script defer="" src="./static/js/bundle.js"></script>
