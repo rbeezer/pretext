@@ -6904,7 +6904,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                     <main class="ptx-main">
                         <!-- relax the 600px width restriction, so with    -->
                         <!-- responsive videos they grow to be much bigger -->
-                        <div class="ptx-content serif" style="max-width: 1600px">
+                        <div class="ptx-content" style="max-width: 1600px">
                             <!-- This is content passed in as a parameter -->
                             <xsl:copy-of select="$content" />
                           </div>
@@ -10685,7 +10685,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:apply-templates select="." mode="sidebars" />
                 <!-- HTML5 main will be a "main" landmark automatically -->
                 <main class="ptx-main">
-                    <div class="ptx-content serif">
+                    <div class="ptx-content">
                         <xsl:if test="$b-watermark">
                             <xsl:attribute name="style">
                                 <xsl:value-of select="$watermark-css" />
@@ -11288,34 +11288,36 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
       <div id="preferences_menu_holder" class="hidden">
         <ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
           <li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-            <ol class="hidden avatars">
+            <ol class="hidden avatar">
               <li data-val="you" tabindex="-1">You!</li>
-              <li data-val="cat" tabindex="-1">😺</li>
-              <li data-val="bust" tabindex="-1">&#x1F464;</li>
-              <li data-val="alien" tabindex="-1">👽</li>
-              <li data-val="dog" tabindex="-1">🐶</li>
-              <li data-val="panda" tabindex="-1">🐼</li>
-              <li data-val="rainbow" tabindex="-1">🌈</li>
+              <li data-val="cat" tabindex="-1">😺 - not implemented</li>
+              <li data-val="bust" tabindex="-1">&#x1F464; - not implemented</li>
+              <li data-val="alien" tabindex="-1">👽 - not implemented</li>
+              <li data-val="dog" tabindex="-1">🐶 - not implemented</li>
+              <li data-val="panda" tabindex="-1">🐼 - not implemented</li>
+              <li data-val="rainbow" tabindex="-1">🌈 - not implemented</li>
+            </ol>
+          </li>
+          <li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden fontfamily">
+              <li data-val="face" data-change="OS" tabindex="-1" style="font-family: 'Open Sans'"><span id="theOS" class="ffcheck">✔️</span><span class="name">Open Sans</span><span class="sample">AaBbCc 123 PreTeXt</span></li>
+              <li data-val="face" data-change="RS" tabindex="-1" style="font-family: 'Roboto Serif'"><span id="theRS" class="ffcheck"></span><span class="name">Roboto Serif</span><span class="sample">AaBbCc 123 PreTeXt</span></li>
             </ol>
           </li>
           <li data-env="font" tabindex="-1">Adjust font<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
             <ol class="hidden fonts">
-              <li>Face</li>
-<li></li>
-              <li data-val="face" data-change="ss" tabindex="-1">Serif<span id="theserif" class="check">✔️</span></li>
-              <li data-val="face" data-change="serif" tabindex="-1">Sans-serif<span id="thess" class="check"></span></li>
               <li>Size</li>
 <li><span id="thesize">12</span></li>
-              <li data-val="size" data-change="-1" tabindex="-1" style="font-size: 85%">SMALLER</li>
-              <li data-val="size" data-change="1" tabindex="-1" style="font-size: 115%">LARGER</li>
+              <li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
+              <li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
               <li>Letter spacing</li>
-<li><span id="thelspace">0</span>/200</li>
+<li><span id="thelspace">0</span><span class="byunits">/200</span></li>
               <li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
               <li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
               <li>Word spacing</li>
-<li><span id="thewspace">0</span>/50</li>
-              <li data-val="wspace" data-change="-1" tabindex="-1">small&#8197;gap</li>
-              <li data-val="wspace" data-change="1" tabindex="-1">large&#8195;gap</li>
+<li><span id="thewspace">0</span><span class="byunits">/50</span></li>
+              <li data-val="wspace" data-change="-1" tabindex="-1">smaller&#8197;gap&#8195;</li>
+              <li data-val="wspace" data-change="1" tabindex="-1">larger&#8195;gap</li>
               <li>Width</li>
 <li><span id="thewdth">100</span></li>
               <li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
@@ -11325,17 +11327,26 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
               <li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
               <li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
               <li>Line Spacing</li>
-<li><span id="theheight">12</span>/10</li>
-              <li data-val="height" data-change="-1" tabindex="-1">closer<br/>together</li>
-              <li data-val="height" data-change="1" tabindex="-1">further<br/>&#8195;<br/>apart</li>
+<li><span id="theheight">135</span><span class="byunits">/100</span></li>
+              <li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br/>together</li>
+              <li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br/>apart</li>
             </ol>
           </li>
-          <li data-env="mode" tabindex="-1">Select dark/light mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+          <li data-env="mode" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
             <ol class="hidden mode">
               <li data-val="light" tabindex="-1">light</li>
-              <li data-val="pastel" tabindex="-1">pastel</li>
-              <li data-val="grey" tabindex="-1">grey</li>
-              <li data-val="dark" tabindex="-1">dark</li>
+              <li data-val="pastel" tabindex="-1">pastel - not working yet</li>
+              <li data-val="grey" tabindex="-1">grey - not working yet</li>
+              <li data-val="dark" tabindex="-1">dark - not working yet</li>
+            </ol>
+          </li>
+          <li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden ruler">
+              <li data-val="none" tabindex="-1">none</li>
+              <li data-val="underline" tabindex="-1">underline - not working yet</li>
+              <li data-val="lunderline" tabindex="-1">L-underline - not working yet</li>
+              <li data-val="greybar" tabindex="-1">grey bar - not working yet</li>
+              <li data-val="lightbox" tabindex="-1">light box - not working yet</li>
             </ol>
           </li>
         </ol>
