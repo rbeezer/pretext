@@ -11284,18 +11284,18 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <xsl:template name="user-preferences-menu">
     <button id="user-preferences-button" class="user-preferences-button button" title="Modify user preferences">
-      <span class="name">You!</span>
+      <span id="theavatarbutton" class="name">You!</span>
       <div id="preferences_menu_holder" class="hidden">
         <ol id="preferences_menu" style="font-family: 'Roboto Serif', serif;">
           <li data-env="avatar" tabindex="-1">Choose avatar<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
             <ol class="hidden avatar">
-              <li data-val="you" tabindex="-1">You!</li>
-              <li data-val="cat" tabindex="-1">😺 - not implemented</li>
-              <li data-val="bust" tabindex="-1">&#x1F464; - not implemented</li>
-              <li data-val="alien" tabindex="-1">👽 - not implemented</li>
-              <li data-val="dog" tabindex="-1">🐶 - not implemented</li>
-              <li data-val="panda" tabindex="-1">🐼 - not implemented</li>
-              <li data-val="rainbow" tabindex="-1">🌈 - not implemented</li>
+              <li data-val="You!" tabindex="-1"><span id="theYou!" class="avatarcheck">✔️</span>You!</li>
+              <li data-val="😺" tabindex="-1"><span id="the😺" class="avatarcheck"></span>😺</li>
+              <li data-val="&#x1F464;" tabindex="-1"><span id="the&#x1F464;" class="avatarcheck"></span>&#x1F464;</li>
+              <li data-val="👽" tabindex="-1"><span id="the👽" class="avatarcheck"></span>👽</li>
+              <li data-val="🐶" tabindex="-1"><span id="the🐶" class="avatarcheck"></span>🐶</li>
+              <li data-val="🐼" tabindex="-1"><span id="the🐼" class="avatarcheck"></span>🐼</li>
+              <li data-val="🌈" tabindex="-1"><span id="the🌈" class="avatarcheck"></span>🌈</li>
             </ol>
           </li>
           <li data-env="fontfamily" tabindex="-1">Font family<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
