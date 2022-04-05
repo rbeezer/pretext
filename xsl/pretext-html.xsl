@@ -11332,12 +11332,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
               <li data-val="height" data-change="5" tabindex="-1" style="line-height: 1.75">further<br/>apart</li>
             </ol>
           </li>
-          <li data-env="mode" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
-            <ol class="hidden mode">
-              <li data-val="light" tabindex="-1">light</li>
-              <li data-val="pastel" tabindex="-1">pastel - not working yet</li>
-              <li data-val="grey" tabindex="-1">grey - not working yet</li>
-              <li data-val="dark" tabindex="-1">dark - not working yet</li>
+          <li data-env="atmosphere" tabindex="-1">Light/dark mode<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
+            <ol class="hidden atmosphere">
+              <li data-val="default" tabindex="-1"><span id="thedefault" class="atmospherecheck">✔️</span>default</li>
+              <li data-val="pastel" tabindex="-1"><span id="thepastel" class="atmospherecheck"></span>pastel</li>
+              <li data-val="twilight" tabindex="-1"><span id="thetwilight" class="atmospherecheck"></span>twilight</li>
+              <li data-val="midnight" tabindex="-1"><span id="themidnight" class="atmospherecheck"></span>midnight</li>
             </ol>
           </li>
           <li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
