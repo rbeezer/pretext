@@ -11310,14 +11310,6 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <li><span id="thesize">12</span></li>
               <li data-val="size" data-change="-1" tabindex="-1" style="font-size: 80%">Smaller</li>
               <li data-val="size" data-change="1" tabindex="-1" style="font-size: 110%">Larger</li>
-              <li>Letter spacing</li>
-<li><span id="thelspace">0</span><span class="byunits">/200</span></li>
-              <li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
-              <li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
-              <li>Word spacing</li>
-<li><span id="thewspace">0</span><span class="byunits">/50</span></li>
-              <li data-val="wspace" data-change="-1" tabindex="-1">smaller&#8197;gap&#8195;</li>
-              <li data-val="wspace" data-change="1" tabindex="-1">larger&#8195;gap</li>
               <li>Width</li>
 <li><span id="thewdth">100</span></li>
               <li data-val="wdth" data-change="-5" tabindex="-1" style="font-variation-settings: 'wdth' 60">narrower</li>
@@ -11326,6 +11318,14 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <li><span id="thewght">400</span></li>
               <li data-val="wght" data-change="-50" tabindex="-1" style="font-weight: 200">thinner</li>
               <li data-val="wght" data-change="50" tabindex="-1" style="font-weight: 700">heavier</li>
+              <li>Letter spacing</li>
+<li><span id="thelspace">0</span><span class="byunits">/200</span></li>
+              <li data-val="lspace" data-change="-1" tabindex="-1">closer</li>
+              <li data-val="lspace" data-change="1" tabindex="-1">f a r t h e r</li>
+              <li>Word spacing</li>
+<li><span id="thewspace">0</span><span class="byunits">/50</span></li>
+              <li data-val="wspace" data-change="-1" tabindex="-1">smaller&#8197;gap&#8195;</li>
+              <li data-val="wspace" data-change="1" tabindex="-1">larger&#8195;gap</li>
               <li>Line Spacing</li>
 <li><span id="theheight">135</span><span class="byunits">/100</span></li>
               <li data-val="height" data-change="-5" tabindex="-1" style="line-height: 1">closer<br/>together</li>
@@ -11342,11 +11342,17 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
           </li>
           <li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
             <ol class="hidden ruler">
-              <li data-val="none" tabindex="-1">none</li>
-              <li data-val="underline" tabindex="-1">underline - not working yet</li>
-              <li data-val="lunderline" tabindex="-1">L-underline - not working yet</li>
-              <li data-val="greybar" tabindex="-1">grey bar - not working yet</li>
-              <li data-val="lightbox" tabindex="-1">light box - not working yet</li>
+              <li data-val="none" tabindex="-1"><span id="thenone" class="rulercheck">✔️</span>none</li>
+              <li data-val="underline" tabindex="-1"><span id="theunderline" class="rulercheck"></span>underline</li>
+              <li data-val="lunderline" tabindex="-1"><span id="thelunderline" class="rulercheck"></span>L-underline</li>
+              <li data-val="greybar" tabindex="-1"><span id="thegreybar" class="rulercheck"></span>grey bar</li>
+              <li data-val="lightbox" tabindex="-1"><span id="thelightbox" class="rulercheck"></span>light box</li>
+              <li data-val="sunrise" tabindex="-1"><span id="thesunrise" class="rulercheck"></span>sunrise</li>
+              <li data-val="sunriseunderline" tabindex="-1"><span id="thesunriseunderline" class="atmospherecheck"></span>sunrise underline</li>
+              <li class="moveQ">Motion by:</li>
+              <li data-val="mouse" tabindex="-1"><span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
+              <li data-val="arrow" tabindex="-1"><span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
+              <li data-val="eye" tabindex="-1"><span id="theeye" class="motioncheck"></span>eye tracking - not yet</li>
             </ol>
           </li>
         </ol>
