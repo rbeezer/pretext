@@ -11336,8 +11336,9 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
             <ol class="hidden atmosphere">
               <li data-val="default" tabindex="-1"><span id="thedefault" class="atmospherecheck">✔️</span>default</li>
               <li data-val="pastel" tabindex="-1"><span id="thepastel" class="atmospherecheck"></span>pastel</li>
-              <li data-val="twilight" tabindex="-1"><span id="thetwilight" class="atmospherecheck"></span>twilight</li>
-              <li data-val="midnight" tabindex="-1"><span id="themidnight" class="atmospherecheck"></span>midnight</li>
+              <li data-val="darktwilight" tabindex="-1"><span id="thedarktwilight" class="atmospherecheck"></span>twilight</li>
+              <li data-val="dark" tabindex="-1"><span id="thedark" class="atmospherecheck"></span>dark</li>
+              <li data-val="darkmidnight" tabindex="-1"><span id="thedarkmidnight" class="atmospherecheck"></span>midnight</li>
             </ol>
           </li>
           <li data-env="ruler" tabindex="-1">Reading ruler<div class="wrap_to_submenu"><span class="to_submenu">▻</span></div>
@@ -11348,7 +11349,7 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
               <li data-val="greybar" tabindex="-1"><span id="thegreybar" class="rulercheck"></span>grey bar</li>
               <li data-val="lightbox" tabindex="-1"><span id="thelightbox" class="rulercheck"></span>light box</li>
               <li data-val="sunrise" tabindex="-1"><span id="thesunrise" class="rulercheck"></span>sunrise</li>
-              <li data-val="sunriseunderline" tabindex="-1"><span id="thesunriseunderline" class="atmospherecheck"></span>sunrise underline</li>
+              <li data-val="sunriseunderline" tabindex="-1"><span id="thesunriseunderline" class="rulercheck"></span>sunrise underline</li>
               <li class="moveQ">Motion by:</li>
               <li data-val="mouse" tabindex="-1"><span id="themouse" class="motioncheck">✔️</span>follow the mouse</li>
               <li data-val="arrow" tabindex="-1"><span id="thearrow" class="motioncheck"></span>up/down arrows - not yet</li>
