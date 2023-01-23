@@ -10951,6 +10951,12 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
                 <xsl:call-template name="runestone-link"/>
                 <xsl:call-template name="mathjax-link" />
             </div>
+
+
+            <xsl:call-template name="runestone-ethical-ads"/>
+
+
+
             <!-- analytics services, if requested -->
             <xsl:call-template name="statcounter"/>
             <xsl:call-template name="google-classic"/>
@@ -10962,6 +10968,23 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     </html>
     </exsl:document>
 </xsl:template>
+
+
+<xsl:template name="runestone-ethical-ads">
+    <xsl:if test="$b-host-runestone">
+        <xsl:text>{% if dynamic_pages == 'True' %}</xsl:text>
+        <xsl:text>    {% raw %}</xsl:text>
+        <xsl:text>      {% if show_ethical_ad  %}</xsl:text>
+        <div style="width: 100%">
+            <div data-ea-publisher="runestoneacademy" data-ea-type="image" style="display: flex; justify-content: center"/>
+        </div>
+        <xsl:text>      {% endif %}</xsl:text>
+        <xsl:text>    {% endraw %}</xsl:text>
+        <xsl:text>{% endif %}</xsl:text>
+    </xsl:if>
+</xsl:template>
+
+
 
 <!-- A minimal individual page:                              -->
 <!-- Inputs:                                                 -->
