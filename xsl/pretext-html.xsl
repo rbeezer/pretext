@@ -12550,6 +12550,10 @@ TODO:
             <xsl:text>  },&#xa;</xsl:text>
         </xsl:if>
         <xsl:text>};&#xa;</xsl:text>
+
+<script src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script> 
+
+        
     </xsl:element>
     <!-- mathjax javascript -->
     <xsl:element name="script">
