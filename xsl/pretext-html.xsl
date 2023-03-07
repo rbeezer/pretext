@@ -12546,11 +12546,8 @@ TODO:
             <xsl:text>  },&#xa;</xsl:text>
         </xsl:if>
         <xsl:text>};&#xa;</xsl:text>
-
-<script src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script> 
-
-
     </xsl:element>
+<script src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script> 
     <!-- mathjax javascript -->
     <xsl:element name="script">
         <!-- probably should be universal, but only adding for MJ 4    -->
