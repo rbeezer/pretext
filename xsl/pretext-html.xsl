@@ -10972,14 +10972,10 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 
 <xsl:template name="runestone-ethical-ads">
     <xsl:if test="$b-host-runestone">
-        <xsl:text>{% if dynamic_pages == 'True' %}</xsl:text>
-        <xsl:text>    {% raw %}</xsl:text>
-        <xsl:text>      {% if show_ethical_ad  %}</xsl:text>
+        <xsl:text>{% if show_ethical_ad %}</xsl:text>
         <div style="width: 100%">
             <div data-ea-publisher="runestoneacademy" data-ea-type="image" style="display: flex; justify-content: center"/>
         </div>
-        <xsl:text>      {% endif %}</xsl:text>
-        <xsl:text>    {% endraw %}</xsl:text>
         <xsl:text>{% endif %}</xsl:text>
     </xsl:if>
 </xsl:template>
@@ -12553,7 +12549,7 @@ TODO:
 
 <script src="https://media.ethicalads.io/media/client/ethicalads.min.js"></script> 
 
-        
+
     </xsl:element>
     <!-- mathjax javascript -->
     <xsl:element name="script">
