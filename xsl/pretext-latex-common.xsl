@@ -7474,6 +7474,15 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
     <xsl:text>}</xsl:text>
 </xsl:template>
 
+<xsl:template name="c-wrapper">
+    <xsl:param name="content"/>
+    <xsl:text>\texttt{</xsl:text>
+    <xsl:call-template name="escape-text-to-latex">
+        <xsl:with-param name="text" select="$content"/>
+    </xsl:call-template>
+    <xsl:text>}</xsl:text>
+</xsl:template>
+
 <xsl:template match="idx/seealso" mode="latex-index">
     <xsl:text>|seealso{</xsl:text>
     <xsl:apply-templates/>

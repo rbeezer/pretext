@@ -8705,11 +8705,10 @@ along with MathBook XML.  If not, see <http://www.gnu.org/licenses/>.
 <!-- ############# -->
 
 <!-- Code, inline -->
-<!-- PCDATA only, so drop non-text nodes -->
-<!-- NB: "code-block" class otherwise -->
-<xsl:template match="c">
+<xsl:template name="c-wrapper">
+    <xsl:param name="content"/>
     <code class="code-inline tex2jax_ignore">
-        <xsl:value-of select="." />
+        <xsl:value-of select="$content"/>
     </code>
 </xsl:template>
 

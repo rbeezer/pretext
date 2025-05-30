@@ -10399,6 +10399,19 @@ http://andrewmccarthy.ie/2014/11/06/swung-dash-in-latex/
     <xsl:call-template name="rsq-character"/>
 </xsl:template>
 
+<!-- Inline Code -->
+<xsl:template match="c">
+    <xsl:call-template name="c-wrapper">
+        <xsl:with-param name="content" select="."/>
+    </xsl:call-template>
+</xsl:template>
+
+<xsl:template name="c-wrapper">
+    <xsl:param name="content"/>
+    <xsl:message>PTX: WARNING: Inline code 'c' element found, but no specific HTML or LaTeX c-wrapper implementation was applied. Using raw content.</xsl:message>
+    <xsl:value-of select="$content"/>
+</xsl:template>
+
 <xsl:template match="dblbrackets">
     <xsl:call-template name="ldblbracket-character"/>
     <xsl:apply-templates/>
